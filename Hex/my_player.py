@@ -1,7 +1,8 @@
 # =============================================================================
 # INF8175 - Projet Hex
 # Agent: Minimax avec Alpha-Beta Pruning et Iterative Deepening
-#
+# ELHADJI FALLOU ADAMA GUEYE - 2126169
+# KYLIAN KOUASSI- 
 # Stratégie:
 #   - Minimax avec élagage alpha-beta pour explorer l'arbre de jeu
 #   - Iterative deepening: on cherche à profondeur 1, puis 2, puis 3...
@@ -32,10 +33,6 @@ class MyPlayer(PlayerHex):
         self._time_limit = None
         self._start_time = None
 
-    # =========================================================================
-    # POINT D'ENTRÉE PRINCIPAL
-    # =========================================================================
-
     def compute_action(self, current_state: GameStateHex,
                        remaining_time: float = 15 * 60, **kwargs) -> Action:
         TIME_PER_MOVE = 10.0
@@ -49,10 +46,6 @@ class MyPlayer(PlayerHex):
 
         best_action = self._iterative_deepening(current_state)
         return best_action
-
-    # =========================================================================
-    # ITERATIVE DEEPENING
-    # =========================================================================
 
     def _iterative_deepening(self, state: GameStateHex) -> Action:
         possible_actions = list(state.get_possible_stateless_actions())
@@ -105,10 +98,6 @@ class MyPlayer(PlayerHex):
 
         return best_action, best_score
 
-    # =========================================================================
-    # MINIMAX AVEC ALPHA-BETA
-    # =========================================================================
-
     def _minimax(self, state: GameStateHex, depth: int,
                  alpha: float, beta: float, is_maximizing: bool) -> float:
         self._check_time()
@@ -155,10 +144,6 @@ class MyPlayer(PlayerHex):
                     break
             return min_score
 
-    # =========================================================================
-    # HEURISTIQUE : DIFFÉRENCE DE CHEMINS LES PLUS COURTS (DIJKSTRA)
-    # =========================================================================
-
     def _heuristic(self, state: GameStateHex) -> float:
         my_dist = self._shortest_path(state, self.piece_type)
         opp_type = "B" if self.piece_type == "R" else "R"
@@ -175,7 +160,6 @@ class MyPlayer(PlayerHex):
         env = state.get_rep().get_env()
         dim = state.get_rep().get_dimensions()[0]
 
-        # Pure Python 2D list instead of numpy
         dist = [[float('inf')] * dim for _ in range(dim)]
         pq = []
 
@@ -231,10 +215,6 @@ class MyPlayer(PlayerHex):
 
         return float('inf')
 
-    # =========================================================================
-    # UTILITAIRES
-    # =========================================================================
-
     def _get_my_player_id(self, state: GameStateHex) -> int:
         for player in state.players:
             if player.get_piece_type() == self.piece_type:
@@ -244,11 +224,6 @@ class MyPlayer(PlayerHex):
     def _check_time(self):
         if time.time() >= self._time_limit:
             raise _TimeOut()
-
-
-# =============================================================================
-# Exception interne pour interrompre la recherche proprement
-# =============================================================================
 
 class _TimeOut(Exception):
     pass
