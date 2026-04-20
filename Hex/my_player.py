@@ -2,7 +2,7 @@
 # INF8175 - Projet Hex
 # Agent: Minimax avec Alpha-Beta Pruning et Iterative Deepening
 # ELHADJI FALLOU ADAMA GUEYE - 2126169
-# KYLIAN KOUASSI- 
+# KYLIAN KOUASSI - 2194817
 # Stratégie:
 #   - Minimax avec élagage alpha-beta pour explorer l'arbre de jeu
 #   - Iterative deepening: on cherche à profondeur 1, puis 2, puis 3...
