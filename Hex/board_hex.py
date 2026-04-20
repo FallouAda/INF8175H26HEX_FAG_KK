@@ -110,3 +110,4 @@ class BoardHex(Board):
                     for x, y in data["env"].items()},
             "dim": data["dim"]
         })
+ 
